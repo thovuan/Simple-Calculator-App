@@ -1,0 +1,135 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const SubtractionMath());
+}
+
+class SubtractionMath extends StatelessWidget {
+  const SubtractionMath({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: '武安寿ー天魔剣術'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+
+  // Tạo TextEditingController để điều khiển TextField
+  final TextEditingController _a = TextEditingController();
+  final TextEditingController _b = TextEditingController();
+  String _outputText = ''; // Biến để lưu kết quả xuất ra
+
+  void _handleInput() {
+    setState(() {
+      // Lấy giá trị từ TextField và xử lý (ở đây chỉ gán trực tiếp)
+
+      _outputText = (int.parse(_a.text) - int.parse(_b.text)).toString();
+    });
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(
+        // TRY THIS: Try changing the color here to a specific color (to
+        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+        // change color while the other colors stay the same.
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Khung nhập liệu
+            TextField(
+              controller: _a,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Nhập hệ số a',
+              ),
+            ),
+            SizedBox(height: 16),
+            TextField(
+              controller: _b,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Nhập hệ số b',
+              ),
+            ),
+            SizedBox(height: 16), // Khoảng cách giữa các widget
+            ElevatedButton(
+              onPressed: _handleInput,
+              child: Text('Giải: a - b'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Trở về trang trước đó
+                Navigator.pop(context);
+              },
+              child: Text('Quay lại trang đầu tiên'),
+            ),
+
+            SizedBox(height: 16),
+            // Khung xuất kết quả
+            Text(
+              'Kết quả a - b: $_outputText',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
