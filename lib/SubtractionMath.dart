@@ -127,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'Kết quả a - b: $_outputText',
               style: TextStyle(fontSize: 18),
             ),
+            const Text('Created By Tho Vu An',),
           ],
         ),
       ),
